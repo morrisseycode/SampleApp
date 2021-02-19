@@ -6,6 +6,7 @@ using SampleApp.DAL;
 using SampleApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,7 +40,21 @@ namespace SampleApp.Pages
             }
 
             var db = new DbAccess();
-            db.TriggerSecurityWarning(_config.GetConnectionString("conn"), Customer.Name, Customer.Password);
+
+            string dbConn = _config.GetConnectionString("conn");
+            db.TriggerSecurityWarning(dbConn, Customer.Name, Customer.Password);
+
+            //string name = Request.Form["product_name"];
+            //using (SqlConnection connection = new SqlConnection(dbConn))
+            //{
+            //    SqlCommand sqlCommand = new SqlCommand()
+            //    {
+            //        CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + name + "'",
+            //        CommandType = CommandType.Text,
+            //    };
+
+            //    SqlDataReader reader = sqlCommand.ExecuteReader();
+            //}
 
             return RedirectToPage("./Index");
         }
