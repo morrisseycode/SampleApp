@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,29 +16,46 @@ namespace SampleApp.DAL
         {
         }
 
+
         public object TriggerSecurityWarning(string connString, string name, string password)
         {
-            SqlConnection someConnection = new SqlConnection(connString);
-            SqlCommand someCommand = new SqlCommand();
-            someCommand.Connection = someConnection;
-
-            someCommand.CommandText = "SELECT SecretInfo FROM Users " +
-               "WHERE Username='" + name +
-               "' AND Password='" + password + "'";
-
-            object secretInfo;
-
-            try
+            using (var connection = new SqlConnection(connString))
             {
-                someConnection.Open();
-                secretInfo = someCommand.ExecuteScalar();
-                someConnection.Close();
+                var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
+                  + name + "' ORDER BY PRICE";
+                var adapter = new SqlDataAdapter(query1, connection);
+                var result = new DataSet();
+                try
+                {
+                    adapter.Fill(result);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return result;
             }
-            catch(Exception ex)
-            {
-                secretInfo = null;
-            }
-            return secretInfo;
+            //SqlConnection someConnection = new SqlConnection(connString);
+            //SqlCommand someCommand = new SqlCommand();
+            //someCommand.Connection = someConnection;
+
+            //someCommand.CommandText = "SELECT SecretInfo FROM Users " +
+            //   "WHERE Username='" + name +
+            //   "' AND Password='" + password + "'";
+
+            //object secretInfo;
+
+            //try
+            //{
+            //    someConnection.Open();
+            //    secretInfo = someCommand.ExecuteScalar();
+            //    someConnection.Close();
+            //}
+            //catch(Exception ex)
+            //{
+            //    secretInfo = null;
+            //}
+            //return secretInfo;
         }
     }
 }

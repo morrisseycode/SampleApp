@@ -2,5 +2,3 @@
 
 # dotnet_analyzer_diagnostic.severity = error
 
-# CA2100: Review SQL queries for security vulnerabilities
-dotnet_diagnostic.CA2100.severity = error
