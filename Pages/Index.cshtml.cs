@@ -17,7 +17,7 @@ namespace SampleApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private IConfiguration _config;
-        private string secretAPIKey = "AIzaSyCuEKyaBjjAkbWkhwhrs9Sg1574nOs8QRM";
+        private string secretagainAPIKey = "AIzaSyCuEKyaBjjAkbWkhwhrs9Sg1574nOs8QRM";
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
         {
