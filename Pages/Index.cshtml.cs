@@ -17,7 +17,7 @@ namespace SampleApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private IConfiguration _config;
-        private string secret1APIKey = "AIzaSyCuEKyaBjjAkbWkhwhrs9Sg1574nOs8QRM";
+        private string secretAPIKey = "AIzaSyCuEKyaBjjAkbWkhwhrs9Sg1574nOs8QRM";
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
         {
@@ -45,17 +45,17 @@ namespace SampleApp.Pages
             string dbConn = _config.GetConnectionString("conn");
             db.TriggerSecurityWarning(dbConn, Customer.Name, Customer.Password);
 
-            //string name = Request.Form["product_name"];
-            //using (SqlConnection connection = new SqlConnection(dbConn))
-            //{
-            //    SqlCommand sqlCommand = new SqlCommand()
-            //    {
-            //        CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + name + "'",
-            //        CommandType = CommandType.Text,
-            //    };
+            string name = Request.Form["product_name"];
+            using (SqlConnection connection = new SqlConnection(dbConn))
+            {
+                SqlCommand sqlCommand = new SqlCommand()
+                {
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + name + "'",
+                    CommandType = CommandType.Text,
+                };
 
-            //    SqlDataReader reader = sqlCommand.ExecuteReader();
-            //}
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+            }
 
             return RedirectToPage("./Index");
         }
