@@ -17,6 +17,7 @@ namespace SampleApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private IConfiguration _config;
+        private string GoogleAPIKey = "AIzaSyCuEKyaBjjAkbWkhwhrs9Sg1574nOs8QRM";
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
         {
